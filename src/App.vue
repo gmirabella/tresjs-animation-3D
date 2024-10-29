@@ -37,14 +37,16 @@ onLoop(({ delta, elapsed }) => {
 watchEffect(() => {
   console.log(diceRef.value)
 })
+
 </script>
 
 <template>
   <TresCanvas clear-color="#506665">
     <TresPerspectiveCamera :position="[0, 4, 4]" :look-at="[0, 0, 0]" />
     <TresMesh ref="diceRef" :position="[0, 0, 0]" :scale="[1, 1, 1]">
-      <!-- <TresBoxGeometry :args="[1, 1, 1]" /> cube  -->
-      <TresIcosahedronGeometry :args="[1, 0]" />
+      <Suspense>
+      <GLTFModel ref="diceRef" path="/assets/d20-gold_edition.glb"/>
+    </Suspense>
       <TresMeshNormalMaterial />
     </TresMesh>
     <!-- <TresAxesHelper /> -->
